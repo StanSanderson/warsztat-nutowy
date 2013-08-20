@@ -10,7 +10,7 @@
 #(set-global-staff-size 18)
 
 \paper {
-  indent = 0 \mm
+  indent = 50 \mm
   left-margin = 16 \mm
   right-margin = 15 \mm
   system-system-spacing #'basic-distance = 18
@@ -35,6 +35,7 @@ melodiaSopranu = \relative f' {
     e4 fis8 g8 fis4. g8 |
     e8 fis8 g8 a8 g4 fis4 |
   }
+  \break
   % 5
   g4 a8 b8 a4a8 b8 |
   c4 b8 a8 g4 fis4 |
@@ -150,7 +151,9 @@ zwrotkaV = \markup \column {
 %--------------------------------CAŁOŚĆ
 
 \score {
-  \new ChoirStaff <<
+  \new ChoirStaff
+  <<
+    \set ChoirStaff.instrumentName = \markup { \epsfile #X #30 #"cos.eps" \hspace #3 }
     % \new ChordNames { \germanChords \akordy }
     \new Staff = sopran {
       \clef treble
@@ -212,6 +215,10 @@ zwrotkaV = \markup \column {
   \layout {
     \compressFullBarRests
     \override NoteHead #'style = #'altdefault
+    \context {
+      \Score
+      \override InstrumentName #'self-alignment-X = #right
+    }
     \context {
       \Staff
       \consists "Ambitus_engraver"
